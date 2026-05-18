@@ -24,6 +24,18 @@ You create **two Obsidian vaults** with their own git repos. One is yours. One i
 - **`skills/`** — The vault-capture and daily reflection skills your agent will use
 - **`docs/`** — Setup guide and concept explainer
 
+## How Vault-Capture Works
+
+The vault-capture skill is how your agent reads your vault and, when asked, writes to it. Here's the flow:
+
+**At session start**, the agent pulls your vault and reads recent notes — decisions you've made, architecture you've documented, context you've written. This is how it knows what you're working on without you repeating yourself.
+
+**During a session**, you can ask the agent to capture something: `/note we decided to use Postgres instead of Mongo` or `save this conversation to my notes.` The agent creates a formatted note in your vault's inbox, tags it, links it to related notes, and pushes to git.
+
+**The boundary**: the agent reads freely but only writes when you explicitly direct it. No auto-formatting. No "helpful" reorganizing. Your vault stays in your voice because you're the only one who writes to it without permission.
+
+**The skill files** live in `skills/vault-capture/` — they're the instructions your agent follows. Install them, and your agent knows how to navigate your vault without overstepping.
+
 ## Quick Start
 
 Read [`docs/setup.md`](docs/setup.md) for the step-by-step. The short version:
