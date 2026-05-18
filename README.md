@@ -1,65 +1,38 @@
 # Tri-Node Memory
 
-**A memory architecture for AI agents that actually remember — without trampling your data.**
+**A memory architecture for AI agents. Two vaults. Clear boundaries. The agent learns. Your stuff stays yours.**
 
 ---
 
-## The Problem
+## What This Is
 
-AI agents forget. They hallucinate about project scope. They rewrite your documentation without asking. They dump everything into one memory file until context becomes noise.
+A system for giving your AI agent persistent, correctable memory without letting it trample your data.
 
-Even "agentic" frameworks struggle with this. They either stay stateless (no learning), dump everything into one bucket (no signal separation), or auto-overwrite your data (no autonomy).
+You create **two Obsidian vaults** with their own git repos. One is yours. One is the agent's. The agent reads yours, writes to its own, and never mixes them.
 
-The real issue isn't memory — it's *whose* memory.
+## What You'll Need Before Starting
 
-## The Model: Three Nodes, One System
-
-```
-┌─────────────────┐     ┌─────────────────┐
-│   HUMAN VAULT   │     │  AGENT JOURNAL  │
-│   (Your Brain)  │◄───►│ (Agent's Brain) │
-│                 │     │                 │
-│  • Project docs │     │  • SOUL.md      │
-│  • Decisions    │     │  • MEMORY.md    │
-│  • Architecture │     │  • Daily logs   │
-│                 │     │                 │
-│  AGENT READS    │     │  AGENT OWNS     │
-│  NEVER WRITES   │     │  HUMAN CAN READ │
-└────────┬────────┘     └────────┬────────┘
-         │                       │
-         │    ┌──────────────┐   │
-         └───►│  INFERENCE   │◄──┘
-              │  (Scratch)   │
-              │              │
-              │  TRANSIENT   │
-              │  NO PERSIST  │
-              └──────────────┘
-```
-
-**Node 1 — Human Vault:** Your project docs, decisions, architecture. Agent reads, never writes. You stay in control.
-
-**Node 2 — Agent Journal:** The agent's own continuity. SOUL.md, MEMORY.md, daily logs. Agent owns this. Humans can read it (transparency).
-
-**Node 3 — Inference Layer:** Session scratch space. Where thinking happens. Nothing persists unless promoted.
-
-## The Feedback Loop
-
-1. You document in your vault → "Moving from REST to gRPC, 6-month backward compat window."
-2. Agent reads this at session start. Builds context.
-3. Agent processes in its journal: "Project requires dual-stack. User prefers gradual migration over rewrites."
-4. Agent surfaces insights in conversation → "Should we use a facade layer?"
-5. You correct → "No, client-side adapter, different problem."
-6. Agent updates its understanding. Your vault stays untouched. Agent still learned.
+- Two empty GitHub repos (one for your vault, one for the agent's journal)
+- Obsidian (or any markdown editor)
+- An OpenClaw agent (or similar agentic framework)
 
 ## What's in This Repo
 
-- **`templates/`** — Ready-to-use vault and journal structures
-- **`docs/`** — Concept explainer, getting started guide, architecture deep-dive
-- **`examples/`** — Reference implementations (coming soon)
+- **`templates/human-vault/`** — Empty vault structure for your notes
+- **`templates/agent-journal/`** — Empty vault structure for your agent's memory
+- **`templates/openclaw/`** — Append rules for your agent's SOUL.md, AGENTS.md, USER.md, IDENTITY.md
+- **`skills/`** — The vault-capture and daily reflection skills your agent will use
+- **`docs/`** — Setup guide and concept explainer
 
-## Getting Started
+## Quick Start
 
-See [`docs/getting-started.md`](docs/getting-started.md).
+Read [`docs/setup.md`](docs/setup.md) for the step-by-step. The short version:
+
+1. Create two Obsidian vaults, each with its own git repo
+2. Copy the vault structures from `templates/`
+3. Append the tri-node rules to your agent's SOUL.md, AGENTS.md, USER.md, and IDENTITY.md
+4. Install the vault-capture and silicon-memory skills
+5. Point your agent at both vault URLs
 
 ## License
 

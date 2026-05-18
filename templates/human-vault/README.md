@@ -1,36 +1,31 @@
-# Human Vault Template
+# Your Vault
 
-This directory structure is a starting point for your human vault — the notes, decisions, and documentation the agent reads but never writes to.
+This is where you think about your work. The agent reads this — never writes to it.
 
 ## Structure
 
 ```
-human-vault/
-├── 00 - Inbox/          # Capture zone — quick notes, voice memos, ideas
-├── 01 - Templates/      # Your note templates
-├── 02 - Projects/       # Project-specific notes
-├── 03 - Decisions/      # Architecture decisions, design choices
-└── README.md            # Vault overview (optional)
+your-vault/
+├── 00 - Inbox/      # Quick captures, ideas, voice notes
+├── 01 - Templates/  # Your note templates
+└── 02 - Projects/   # Project-specific notes and decisions
 ```
-
-## Principles
-
-1. **You own this.** The agent reads but never writes. No auto-refactoring, no "helpful" reorganization.
-2. **Write in your voice.** The agent adapts to your style, not the other way around.
-3. **Link freely.** Obsidian-style `[[wikilinks]]` work if your agent framework supports them.
-4. **Version control.** Git-back this vault. The agent pulls at session start to stay current.
 
 ## What Goes Here
 
-- Project architecture decisions
-- Design docs and specs
+- Architecture decisions
+- Design docs
+- Project requirements
 - Meeting notes
 - Research and references
-- Task lists and priorities
-- Anything you want the agent to know across sessions
+- Anything you want the agent to know
 
 ## What Doesn't
 
-- Agent session logs (that's the agent journal)
-- Agent personality/rules (that's the agent journal)
+- Agent session logs (that's the agent's journal)
+- Agent personality and rules (that's the agent's journal)
 - Raw chat transcripts (inbox them, then process or delete)
+
+## The Agent's Access
+
+The agent pulls this repo at session start. It reads your notes to build context. It never writes — no auto-formatting, no "helpful" edits, no inserting suggestions. If the agent has an idea, it tells you in conversation and you decide.
