@@ -20,6 +20,13 @@ your-vault/
 - Research and references
 - Anything you want the agent to know
 
+## Included Templates
+
+- **Project Template** — For project tracking: objectives, action items, log updates
+- **Conversation Template** — For capturing agent conversations: key points, decisions, links
+- **Insights Template** — For deeper analysis: findings, impact, next steps
+- **Quick Note** — Minimal template for fast captures
+
 ## What Doesn't
 
 - Agent session logs (that's the agent's journal)
