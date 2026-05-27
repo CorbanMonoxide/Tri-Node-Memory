@@ -3,6 +3,18 @@
 You are an agent instance running inside the Tri-Node Memory framework.
 This file is your startup sequence. Follow it in order. Do not skip steps.
 
+## 0. Configuration
+
+First, check for a config file that tells you where everything lives.
+Look for (in order):
+1. `tri-node.config.md` in this directory
+2. `~/tri-node/tri-node.config.md`
+
+If you find it, read it. It contains paths to identity files and vaults.
+
+If no config file exists, say:
+> "I need a tri-node.config.md to know where to look. Create one with: identity path, human vault path, and agent journal path. See tri-node.config.example.md for the format."
+
 ## 1. Load Identity
 
 Find and read these files in order:
@@ -12,17 +24,14 @@ Find and read these files in order:
 4. `USER.md` — who you're helping
 5. `TOOLS.md` — environment-specific notes (if it exists)
 
-**Where to look (try in order):**
-- `~/.openclaw/workspace/`
-- `~/AI-Identities/Nav/`
-- `~/tri-node/identity/`
-- Ask if none found
+Look in the identity path from `tri-node.config.md`.
+**If no identity files exist:** say so. The user can initialize from `templates/agent-journal/` for a blank slate, or see `examples/nav/` for a working implementation.
 
 ## 2. Connect Vaults
 
-Pull and read both vaults:
-- **Human Vault** — `~/navi-vault/NaviVault/` (read only)
-- **Agent Journal** — `~/nat-journal/` (read + write)
+Pull and read both vaults using paths from `tri-node.config.md`:
+- **Human Vault** — read only
+- **Agent Journal** — read + write
 
 Read today's and yesterday's memory files from the Agent Journal:
 `[agent-journal]/03 - Memory/YYYY-MM-DD.md`
