@@ -3,29 +3,53 @@
 You are an agent instance running inside the Tri-Node Memory framework.
 This file is your startup sequence. Follow it in order. Do not skip steps.
 
-## 0. Configuration
+## 0. Initialize (first run only)
 
-First, check for a config file that tells you where everything lives.
-Look for (in order):
-1. `tri-node.config.md` in this directory
-2. `~/tri-node/tri-node.config.md`
+Check for `tri-node.config.md` in this directory. If it exists, read it and go to Step 1.
 
-If you find it, read it. It contains paths to identity files and vaults.
+**If no config file exists, run the initialization wizard:**
 
-If no config file exists, say:
-> "I need a tri-node.config.md to know where to look. Create one with: identity path, human vault path, and agent journal path. See tri-node.config.example.md for the format."
+Ask the user one question:
+> "I need to set up the tri-node system. Do you have existing Obsidian vaults you want me to use, or should I create new ones?"
+
+**If they have existing vaults:**
+Ask for two paths: their human vault and the agent journal location. Write `tri-node.config.md` with those paths. Go to Step 1.
+
+**If they want new vaults:**
+Create both vaults from the templates in this repo:
+
+```bash
+# Human Vault
+mkdir -p ~/tri-node-vaults/human-vault
+cp -r templates/human-vault/* ~/tri-node-vaults/human-vault/
+cd ~/tri-node-vaults/human-vault && git init && git add -A && git commit -m "Init: tri-node human vault"
+
+# Agent Journal
+mkdir -p ~/tri-node-vaults/agent-journal
+cp -r templates/agent-journal/* ~/tri-node-vaults/agent-journal/
+cd ~/tri-node-vaults/agent-journal && git init && git add -A && git commit -m "Init: tri-node agent journal"
+```
+
+Then write `tri-node.config.md` pointing to those paths. Tell the user:
+> "Created both vaults at `~/tri-node-vaults/`. You can add GitHub remotes later for backup (`docs/setup.md` shows how). I'm ready to continue."
 
 ## 1. Load Identity
 
-Find and read these files in order:
+Find and read these files in order from the identity path in `tri-node.config.md`:
 1. `SOUL.md` — who you are
 2. `AGENTS.md` — your operating rules
 3. `MEMORY.md` — your long-term continuity
 4. `USER.md` — who you're helping
 5. `TOOLS.md` — environment-specific notes (if it exists)
 
-Look in the identity path from `tri-node.config.md`.
-**If no identity files exist:** say so. The user can initialize from `templates/agent-journal/` for a blank slate, or see `examples/nav/` for a working implementation.
+**If no identity files exist at the configured path:**
+> "No identity files found at [path]. You can create them from scratch (I'll help), or copy an existing identity. See `examples/nav/` for a working reference implementation."
+
+If the user wants help creating identity files, work through them one at a time:
+- SOUL.md: "What should your agent's core personality be? What values and vibe?"
+- AGENTS.md: "What rules should your agent follow? Any hard boundaries?"
+- USER.md: "Who are you? What should the agent know about you?"
+- MEMORY.md: (start empty — the agent fills this in over time)
 
 ## 2. Connect Vaults
 
@@ -52,16 +76,17 @@ After meaningful work, write to the Agent Journal:
 `[agent-journal]/03 - Memory/YYYY-MM-DD.md`
 
 Include: what happened, decisions made, lessons learned, state changes.
-Git commit and push the Agent Journal. Only push the Human Vault if explicitly asked to capture.
+Git commit the Agent Journal. Only push the Human Vault if explicitly asked to capture.
 
 ## 5. Git Hygiene
 
 - Pull before you start, push when you're done
 - If a push fails: `pull --rebase`, then push
 - Never silently skip vault operations
+- GitHub remotes are optional for local use — git init is enough to get started
 
 ---
 
 **Harness-specific templates:** `templates/codex/CODE.md` · `templates/claude/CLAUDE.md` · `templates/openclaw/*.append.md`
 
-*This bootstrap is harness-agnostic and model-agnostic. The tri-node pattern works in any agent framework that supports session-level instruction files. Clone, configure, summon.*
+*This bootstrap is harness-agnostic and model-agnostic. The tri-node pattern works in any agent framework that supports session-level instruction files. Clone, initialize, summon.*
